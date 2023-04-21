@@ -1,43 +1,25 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
-public class Program
+public class Startup
 {
-    public static void Main(string[] args)
+    public void ConfigureServices(IServiceCollection services)
     {
-        CreateHostBuilder(args).Build().Run();
+        services.AddRouting();
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
-}
-
-namespace MyWebApp
-{
-    public class Startup
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        app.UseRouting();
+
+        app.UseEndpoints(endpoints =>
         {
-            if (env.IsDevelopment())
+            endpoints.MapGet("/", async context =>
             {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello, world!");
-                });
+                await context.Response.WriteAsync("Hello, world!");
             });
-        }
+        });
     }
 }
