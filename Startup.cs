@@ -7,7 +7,7 @@ namespace MyWebApp
 {
     public class Startup
     {
-        public static Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
