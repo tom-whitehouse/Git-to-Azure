@@ -1,5 +1,5 @@
 <Project>
   <ItemGroup>
-    <Compile Include="Pages/index.cshtml" />
+    <Compile Include="Index.cshtml" />
   </ItemGroup>
 </Project>
