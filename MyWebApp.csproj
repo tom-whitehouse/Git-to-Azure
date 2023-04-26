@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <StartupObject>MyProject.Startup</StartupObject>
+    <StartupObject>Git-to-Azure.Startup</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
