@@ -4,7 +4,7 @@ using System.IO;
 
 namespace MyProject
 {
-    public static class Program
+    public static class Startup
     {
         public static void Main(string[] args)
         {
