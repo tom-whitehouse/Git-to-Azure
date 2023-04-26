@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 public class Program
 {
@@ -22,7 +23,9 @@ public class Program
                     {
                         endpoints.MapGet("/", async context =>
                         {
-                            await context.Response.WriteAsync("Hello, world!");
+                            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "index.html");
+                            var htmlContent = await File.ReadAllTextAsync(filePath);
+                            await context.Response.WriteAsync(htmlContent);
                         });
                     });
                 });
