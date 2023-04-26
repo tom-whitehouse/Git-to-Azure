@@ -1,30 +1,22 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Hosting;
+using System;
+using System.Diagnostics;
+using System.IO;
 
-public class Program
+namespace MyProject
 {
-    public static void Main(string[] args)
+    public static class Program
     {
-        CreateHostBuilder(args).Build().Run();
-    }
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
+        public static void Main(string[] args)
+        {
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "mypage.html");
+            if (File.Exists(filePath))
             {
-                webBuilder.Configure(app =>
-                {
-                    app.UseRouting();
-
-                    app.UseEndpoints(endpoints =>
-                    {
-                        endpoints.MapGet("/", async context =>
-                        {
-                            await context.Response.WriteAsync("Hello, world!");
-                        });
-                    });
-                });
-            });
+                Process.Start(filePath);
+            }
+            else
+            {
+                Console.WriteLine($"File not found: {filePath}");
+            }
+        }
+    }
 }
