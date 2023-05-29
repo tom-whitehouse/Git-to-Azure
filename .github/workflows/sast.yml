@@ -1,10 +1,12 @@
+name: SAST SCAN - git-to-azure-test
+
 on:
   push:
     branches:
       - main
   workflow_dispatch:
   
-  sast:
+sast:
   stage: test
   artifacts:
     reports:
