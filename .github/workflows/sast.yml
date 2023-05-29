@@ -1,4 +1,10 @@
-sast:
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  
+  sast:
   stage: test
   artifacts:
     reports:
