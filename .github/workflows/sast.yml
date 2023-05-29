@@ -1,16 +1,30 @@
-name: "CodeQL"
+# This workflow helps to analyze repository code for vulnerabilities, bugs, and other errors using CodeQL. 
+# For that CodeQL Action is used: https://github.com/github/codeql-action
+# Learn more about CodeQL at https://codeql.github.com/
+
+name: CodeQL
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
+  workflow_call:
+    inputs:
+      languages:
+        description: "Optional input to set languages for CodeQL check. Supported values are: 'cpp', 'csharp', 'go', 'java', 'javascript', 'typescript', 'python', 'ruby'. To set multiple languages, use the same syntax as you can see in the default value."
+        required: false
+        type: string
+        default: "['javascript']"
+      codeql-cfg-path:
+        description: "Optional input to set path to a CodeQL config file"
+        required: false
+        type: string
+      build-command:
+        description: "Optional input to specify manual build command. The multiline syntax is supported"
+        required: false
+        type: string
 
 jobs:
   analyze:
     name: Analyze
-    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     permissions:
       actions: read
       contents: read
@@ -19,45 +33,29 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ $detected-codeql-languages ]
-        # CodeQL supports [ $supported-codeql-languages ]
-        # Use only 'java' to analyze code written in Java, Kotlin or both
-        # Use only 'javascript' to analyze code written in JavaScript, TypeScript or both
-        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
+        language: ${{fromJson(inputs.languages)}}
 
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v3
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
-        languages: ${{ matrix.language }}
-        # If you wish to specify custom queries, you can do so here or in a config file.
-        # By default, queries listed here will override any specified in a config file.
-        # Prefix the list here with "+" to use these queries and those in the config file.
+        languages: ${{matrix.language}}
+        config-file: ${{inputs.codeql-cfg-path}}
 
-        # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
-        # queries: security-extended,security-and-quality
-
-
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
+    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
+    # If this step fails, configure a build command manually using build-command input. This command will be executed in the corresponding step.
     - name: Autobuild
+      if: ${{!inputs.build-command}}
       uses: github/codeql-action/autobuild@v2
 
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-
-    #   If the Autobuild fails above, remove it and uncomment the following three lines.
-    #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
-
-    # - run: |
-    #     echo "Run, Build Application using script"
-    #     ./location_of_script_within_repo/buildscript.sh
+    - name: Manual build
+      if: ${{inputs.build-command}}
+      run: |
+        ${{inputs.build-command}}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
-      with:
-        category: "/language:${{matrix.language}}"
