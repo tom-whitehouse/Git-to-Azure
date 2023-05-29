@@ -21,8 +21,8 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        language: ${{fromJson(inputs.languages)}}
+      #matrix:
+      #  language: ${{fromJson(inputs.languages)}}
 
     steps:
     - name: Checkout
