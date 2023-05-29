@@ -5,21 +5,10 @@
 name: CodeQL
 
 on:
-  workflow_call:
-    inputs:
-      languages:
-        description: "Optional input to set languages for CodeQL check. Supported values are: 'cpp', 'csharp', 'go', 'java', 'javascript', 'typescript', 'python', 'ruby'. To set multiple languages, use the same syntax as you can see in the default value."
-        required: false
-        type: string
-        default: "['javascript']"
-      codeql-cfg-path:
-        description: "Optional input to set path to a CodeQL config file"
-        required: false
-        type: string
-      build-command:
-        description: "Optional input to specify manual build command. The multiline syntax is supported"
-        required: false
-        type: string
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   analyze:
