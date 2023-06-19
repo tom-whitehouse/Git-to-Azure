@@ -47,13 +47,3 @@ jobs:
           slot-name: Production
           publish-profile: ${{secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0DE0B866AA134092B8521885CBADC781}}
           package: .
-
-  test:
-    stage: build
-    image: python:3.8
-    tags:
-      - farah
-    before_script:
-      - pip install flake8
-    script:
-      - python -m flake8
