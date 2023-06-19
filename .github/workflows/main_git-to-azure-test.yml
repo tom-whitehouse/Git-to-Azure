@@ -5,10 +5,10 @@ on:
     branches:
       - main
 
-stages:
+jobs:
 
   # Build Stage - install dependancies and compile code to check safety
-  - stage: Build
+  build :
     displayName: Build
     # Skip stage if SAST failed
     condition: in(stageDependencies.SAST.result, 'Succeeded')
@@ -31,7 +31,7 @@ stages:
           path: ${{env.DOTNET_ROOT}}/myapp
 
   # Deploy Stage - push code to Azure function app
-  - stage: Deploy
+  deploy :
     displayName: Deploy
     # Skip stage if Build failed
     condition: in(stageDependencies.Build.result, 'Succeeded')
