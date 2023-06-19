@@ -9,6 +9,14 @@ on:
       - main
 
 jobs:
+  lint:
+    image: python:3.8
+    tags:
+      - farah
+    before_script:
+      - pip install flake8
+    script:
+      - python -m flake8
   build:
     runs-on: windows-latest
     steps:
