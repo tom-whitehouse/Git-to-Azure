@@ -1,5 +1,4 @@
-steps:
-  - falake8
+name: Lint
 
 on:
   push:
@@ -7,8 +6,15 @@ on:
       - main
 
 jobs:
-  flake8:
-    stage: linting
-    image: registry.gitlab.com/pipeline-components/flake8:latest
-    script:
-      - flake8 --verbose .
+  flake8-lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v3
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: flake8 Lint
+        uses: py-actions/flake8@v2
