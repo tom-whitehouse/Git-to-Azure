@@ -5,18 +5,21 @@ import unittest
 class TestStringMethods(unittest.TestCase):
     """Testing Class"""
     def test_upper(self):
+        """Unit test 1"""
         self.assertEqual('foo'.upper(), 'FOO')
 
     def test_isupper(self):
+        """Unit test 2"""
         self.assertTrue('FOO'.isupper())
         self.assertFalse('Foo'.isupper())
 
     def test_split(self):
-        stringInput = 'hello world'
-        self.assertEqual(stringInput.split(), ['hello', 'world'])
+        """unit test 3"""
+        STRINGINPUT = 'hello world'
+        self.assertEqual(STRINGINPUT.split(), ['hello', 'world'])
         # check that s.split fails when the separator is not a string
         with self.assertRaises(TypeError):
-            stringInput.split(2)
+            STRINGINPUT.split(2)
 
 
 if __name__ == '__main__':
