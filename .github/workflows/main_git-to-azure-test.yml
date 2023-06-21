@@ -59,8 +59,10 @@ jobs:
           # Github token of the repository (automatically created by Github)
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  test:
+  unitTests:
     runs-on: ubuntu-latest
+    name: Unit Tests
+    needs: bandit
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python
@@ -72,7 +74,7 @@ jobs:
 
   build:
     runs-on: windows-latest
-    needs: bandit
+    needs: unitTests
     steps:
       - uses: actions/checkout@v2
       - name: Set up .NET Core
