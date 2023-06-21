@@ -15,11 +15,11 @@ class TestStringMethods(unittest.TestCase):
 
     def test_split(self):
         """unit test 3"""
-        STRINGINPUT = 'hello world'
-        self.assertEqual(STRINGINPUT.split(), ['hello', 'world'])
+        string_input = 'hello world'
+        self.assertEqual(string_input.split(), ['hello', 'world'])
         # check that s.split fails when the separator is not a string
         with self.assertRaises(TypeError):
-            STRINGINPUT.split(2)
+            string_input.split(2)
 
 
 if __name__ == '__main__':
