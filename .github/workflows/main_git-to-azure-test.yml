@@ -24,6 +24,7 @@ jobs:
 
   build:
     runs-on: windows-latest
+    needs: flake8
     steps:
       - uses: actions/checkout@v2
       - name: Set up .NET Core
