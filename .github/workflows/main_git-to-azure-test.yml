@@ -61,7 +61,7 @@ jobs:
       security-events: write 
       actions: read 
 
-    name: Bandit
+    name: Bandit Scan
     runs-on: ubuntu-latest
     needs: unitTests
     continue-on-error: true
