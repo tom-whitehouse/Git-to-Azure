@@ -9,8 +9,8 @@ on:
 jobs:
   # Flake8 Job - checking errors and syntax 
   flake8:
-    runs-on: ubuntu-latest
     name: Flake8
+    runs-on: ubuntu-latest
     steps:
       - name: Check out source repository
         uses: actions/checkout@v3
@@ -23,6 +23,7 @@ jobs:
 
   # Pylint Job - static code analysis holding code to PEP8
   pylint:
+    name: Pylint
     runs-on: ubuntu-latest
     needs: flake8
     steps:
@@ -41,8 +42,8 @@ jobs:
 
   # Unit Test Job - run aall unit tests in repository
   unitTests:
-    runs-on: ubuntu-latest
     name: Unit Tests
+    runs-on: ubuntu-latest
     needs: pylint
     steps:
       - uses: actions/checkout@v3
