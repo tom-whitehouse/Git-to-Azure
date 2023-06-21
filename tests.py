@@ -1,20 +1,20 @@
-"""Module providingFunction printing python version."""
+"""Example Unit tests to demonstrate pipeline capability"""
 import unittest
 
 
 class TestStringMethods(unittest.TestCase):
     """Testing Class"""
     def test_upper(self):
-        """Unit test 1"""
+        """Unit Test 1"""
         self.assertEqual('foo'.upper(), 'FOO')
 
     def test_isupper(self):
-        """Unit test 2"""
+        """Unit Test 2"""
         self.assertTrue('FOO'.isupper())
         self.assertFalse('Foo'.isupper())
 
     def test_split(self):
-        """unit test 3"""
+        """Unit Test 3"""
         string_input = 'hello world'
         self.assertEqual(string_input.split(), ['hello', 'world'])
         # check that s.split fails when the separator is not a string
