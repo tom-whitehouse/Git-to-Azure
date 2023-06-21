@@ -1,0 +1,2 @@
+- name: pipeline-components-flake8
+  uses: pipeline-components/flake8@v0.5.3
