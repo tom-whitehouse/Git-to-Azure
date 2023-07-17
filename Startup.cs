@@ -22,7 +22,7 @@ public class Program
                     {
                         endpoints.MapGet("/", async context =>
                         {
-                            await context.Response.WriteAsync("<html><body><h1>Helloe, world!!</h1></body></html>");
+                            await context.Response.WriteAsync("<html><body><h1>Presentation Demo.</h1></body></html>");
                         });
                     });
                 });
