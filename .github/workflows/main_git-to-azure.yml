@@ -83,7 +83,7 @@ jobs:
     needs: Bandit
     steps:
       - name: Check out source repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
